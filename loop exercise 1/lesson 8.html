@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Game Đoán Số</title>
+</head>
+<body>
+<h2>Chơi Đoán Số</h2>
+<button onclick="choi()">Chơi</button>
+<script>
+    function choi() {
+        let lowerBound = parseInt(prompt("Nhập vào giới hạn dưới của số muốn đoán:"));
+        let upperBound = parseInt(prompt("Nhập vào giới hạn trên của số muốn đoán:"));
+        if (isNaN(lowerBound) || isNaN(upperBound) || lowerBound >= upperBound) {
+            alert("Vui lòng nhập giới hạn hợp lệ!");
+            return;
+        }
+        let randomNumber = Math.floor(Math.random() * (upperBound - lowerBound + 1)) + lowerBound;
+        let numberOfAttempts = 3;
+        for (let i = 0; i < numberOfAttempts; i++) {
+            let guessedNumber = parseInt(prompt("Lần đoán thứ " + (i + 1) + ": Nhập số đoán của bạn:"));
+            if (isNaN(guessedNumber)) {
+                alert("Vui lòng nhập một số hợp lệ!");
+                i--;
+                continue;
+            }
+            if (guessedNumber === randomNumber) {
+                alert("Chúc mừng! Bạn đã đoán đúng!");
+                break;
+            } else if (guessedNumber > randomNumber) {
+                alert("Số bạn đoán lớn hơn số cần đoán. Còn " + (numberOfAttempts - i - 1) + " lượt.");
+            } else {
+                alert("Số bạn đoán bé hơn số cần đoán. Còn " + (numberOfAttempts - i - 1) + " lượt.");
+            }
+            if (i === numberOfAttempts - 1) {
+                alert("Bạn đã hết số lượt đoán. Số cần đoán là: " + randomNumber);
+            }
+        }
+    }
+</script>
+</body>
+</html>
